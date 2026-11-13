@@ -13,13 +13,7 @@ public class Tarifa {
         int importe = 0;
         int horas = horasEmpezadas(minutos);
         if (tipo.equals("COCHE")) {
-            importe = horas * 250;
-            if (importe > 2000) {
-                importe = 2000;
-            }
-            if (residente) {
-                importe = importe - importe * 20 / 100;
-            }
+            importe = Vehiculo.COCHE.importe(horas, residente);
         } else if (tipo.equals("FURGO")) {
             importe = horas * 350;
             if (importe > 2800) {
