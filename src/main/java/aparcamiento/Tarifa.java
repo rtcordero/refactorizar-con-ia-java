@@ -2,14 +2,17 @@ package aparcamiento;
 
 public class Tarifa {
 
+    private static final int MINUTOS_GRATIS = 15;
+    private static final int MINUTOS_POR_HORA = 60;
+
     // calcula lo que paga un vehiculo en centimos
     public int calcula(int minutos, String tipo, boolean residente) {
-        if (minutos <= 15) {
+        if (minutos <= MINUTOS_GRATIS) {
             return 0;
         }
         int importe = 0;
-        int horas = minutos / 60;
-        if (minutos % 60 > 0) {
+        int horas = minutos / MINUTOS_POR_HORA;
+        if (minutos % MINUTOS_POR_HORA > 0) {
             horas++;
         }
         if (tipo.equals("COCHE")) {
