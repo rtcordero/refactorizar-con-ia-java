@@ -3,37 +3,37 @@ package aparcamiento;
 public class Tarifa {
 
     // calcula lo que paga un vehiculo en centimos
-    public int calcula(int min, String t, boolean res) {
-        int p = 0;
-        if (min <= 15) {
+    public int calcula(int minutos, String tipo, boolean residente) {
+        int importe = 0;
+        if (minutos <= 15) {
             return 0;
         } else {
-            int h = min / 60;
-            if (min % 60 > 0) {
-                h++;
+            int horas = minutos / 60;
+            if (minutos % 60 > 0) {
+                horas++;
             }
-            if (t.equals("COCHE")) {
-                p = h * 250;
-                if (p > 2000) {
-                    p = 2000;
+            if (tipo.equals("COCHE")) {
+                importe = horas * 250;
+                if (importe > 2000) {
+                    importe = 2000;
                 }
-                if (res) {
-                    p = p - p * 20 / 100;
+                if (residente) {
+                    importe = importe - importe * 20 / 100;
                 }
             } else {
-                if (t.equals("FURGO")) {
-                    p = h * 350;
-                    if (p > 2800) {
-                        p = 2800;
+                if (tipo.equals("FURGO")) {
+                    importe = horas * 350;
+                    if (importe > 2800) {
+                        importe = 2800;
                     }
-                } else if (t.equals("MOTO")) {
-                    p = h * 100;
-                    if (p > 800) {
-                        p = 800;
+                } else if (tipo.equals("MOTO")) {
+                    importe = horas * 100;
+                    if (importe > 800) {
+                        importe = 800;
                     }
                 }
             }
         }
-        return p;
+        return importe;
     }
 }
