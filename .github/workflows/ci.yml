@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests con JDK ${{ matrix.jdk }}
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        # La LTS más reciente y la última versión publicada.
+        jdk: ['25', '27']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # Las dependencias de Maven, entre ejecuciones.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache-maven
+          key: maven-${{ hashFiles('pom.xml') }}
+      # Maven 3.10.0 en la imagen oficial, igual que en local.
+      - run: scripts/mvn.sh test
+        env:
+          JDK: ${{ matrix.jdk }}
+
+  historial:
+    name: Cada paso hace lo que dice su commit
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Todo el historial, no solo el último commit.
+          fetch-depth: 0
+      # Las dependencias de Maven, entre ejecuciones.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache-maven
+          key: maven-${{ hashFiles('pom.xml') }}
+      - run: scripts/comprobar-historial.sh
