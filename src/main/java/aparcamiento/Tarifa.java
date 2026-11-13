@@ -20,17 +20,15 @@ public class Tarifa {
             if (residente) {
                 importe = importe - importe * 20 / 100;
             }
-        } else {
-            if (tipo.equals("FURGO")) {
-                importe = horas * 350;
-                if (importe > 2800) {
-                    importe = 2800;
-                }
-            } else if (tipo.equals("MOTO")) {
-                importe = horas * 100;
-                if (importe > 800) {
-                    importe = 800;
-                }
+        } else if (tipo.equals("FURGO")) {
+            importe = horas * 350;
+            if (importe > 2800) {
+                importe = 2800;
+            }
+        } else if (tipo.equals("MOTO")) {
+            importe = horas * 100;
+            if (importe > 800) {
+                importe = 800;
             }
         }
         return importe;
