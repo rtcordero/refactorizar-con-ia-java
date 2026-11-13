@@ -11,10 +11,7 @@ public class Tarifa {
             return 0;
         }
         int importe = 0;
-        int horas = minutos / MINUTOS_POR_HORA;
-        if (minutos % MINUTOS_POR_HORA > 0) {
-            horas++;
-        }
+        int horas = horasEmpezadas(minutos);
         if (tipo.equals("COCHE")) {
             importe = horas * 250;
             if (importe > 2000) {
@@ -35,5 +32,13 @@ public class Tarifa {
             }
         }
         return importe;
+    }
+
+    private static int horasEmpezadas(int minutos) {
+        int horas = minutos / MINUTOS_POR_HORA;
+        if (minutos % MINUTOS_POR_HORA > 0) {
+            horas++;
+        }
+        return horas;
     }
 }
