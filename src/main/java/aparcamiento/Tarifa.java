@@ -15,15 +15,9 @@ public class Tarifa {
         if (tipo.equals("COCHE")) {
             importe = Vehiculo.COCHE.importe(horas, residente);
         } else if (tipo.equals("FURGO")) {
-            importe = horas * 350;
-            if (importe > 2800) {
-                importe = 2800;
-            }
+            importe = Vehiculo.FURGO.importe(horas, residente);
         } else if (tipo.equals("MOTO")) {
-            importe = horas * 100;
-            if (importe > 800) {
-                importe = 800;
-            }
+            importe = Vehiculo.MOTO.importe(horas, residente);
         }
         return importe;
     }
