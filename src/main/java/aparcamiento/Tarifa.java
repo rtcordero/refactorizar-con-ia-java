@@ -4,10 +4,10 @@ public class Tarifa {
 
     // calcula lo que paga un vehiculo en centimos
     public int calcula(int minutos, String tipo, boolean residente) {
-        int importe = 0;
         if (minutos <= 15) {
             return 0;
         }
+        int importe = 0;
         int horas = minutos / 60;
         if (minutos % 60 > 0) {
             horas++;
