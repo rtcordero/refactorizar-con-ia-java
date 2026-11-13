@@ -35,10 +35,6 @@ public class Tarifa {
     }
 
     private static int horasEmpezadas(int minutos) {
-        int horas = minutos / MINUTOS_POR_HORA;
-        if (minutos % MINUTOS_POR_HORA > 0) {
-            horas++;
-        }
-        return horas;
+        return Math.ceilDiv(minutos, MINUTOS_POR_HORA);
     }
 }
