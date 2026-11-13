@@ -10,16 +10,10 @@ public class Tarifa {
         if (minutos <= MINUTOS_GRATIS) {
             return 0;
         }
-        int importe = 0;
-        int horas = horasEmpezadas(minutos);
-        if (tipo.equals("COCHE")) {
-            importe = Vehiculo.COCHE.importe(horas, residente);
-        } else if (tipo.equals("FURGO")) {
-            importe = Vehiculo.FURGO.importe(horas, residente);
-        } else if (tipo.equals("MOTO")) {
-            importe = Vehiculo.MOTO.importe(horas, residente);
-        }
-        return importe;
+        return Vehiculo.buscar(tipo)
+                .map(vehiculo -> vehiculo.importe(
+                        horasEmpezadas(minutos), residente))
+                .orElse(0);
     }
 
     private static int horasEmpezadas(int minutos) {

@@ -1,5 +1,8 @@
 package aparcamiento;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /** Precio por hora, tope por estancia y descuento de residente de cada vehículo, en céntimos. */
 enum Vehiculo {
     COCHE(250, 2000, 20),
@@ -15,6 +18,12 @@ enum Vehiculo {
         this.precioPorHora = precioPorHora;
         this.topePorEstancia = topePorEstancia;
         this.descuentoResidente = descuentoResidente;
+    }
+
+    static Optional<Vehiculo> buscar(String tipo) {
+        return Arrays.stream(values())
+                .filter(vehiculo -> tipo.equals(vehiculo.name()))
+                .findFirst();
     }
 
     int importe(int horas, boolean residente) {
