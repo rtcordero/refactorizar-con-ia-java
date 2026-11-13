@@ -7,30 +7,29 @@ public class Tarifa {
         int importe = 0;
         if (minutos <= 15) {
             return 0;
-        } else {
-            int horas = minutos / 60;
-            if (minutos % 60 > 0) {
-                horas++;
+        }
+        int horas = minutos / 60;
+        if (minutos % 60 > 0) {
+            horas++;
+        }
+        if (tipo.equals("COCHE")) {
+            importe = horas * 250;
+            if (importe > 2000) {
+                importe = 2000;
             }
-            if (tipo.equals("COCHE")) {
-                importe = horas * 250;
-                if (importe > 2000) {
-                    importe = 2000;
+            if (residente) {
+                importe = importe - importe * 20 / 100;
+            }
+        } else {
+            if (tipo.equals("FURGO")) {
+                importe = horas * 350;
+                if (importe > 2800) {
+                    importe = 2800;
                 }
-                if (residente) {
-                    importe = importe - importe * 20 / 100;
-                }
-            } else {
-                if (tipo.equals("FURGO")) {
-                    importe = horas * 350;
-                    if (importe > 2800) {
-                        importe = 2800;
-                    }
-                } else if (tipo.equals("MOTO")) {
-                    importe = horas * 100;
-                    if (importe > 800) {
-                        importe = 800;
-                    }
+            } else if (tipo.equals("MOTO")) {
+                importe = horas * 100;
+                if (importe > 800) {
+                    importe = 800;
                 }
             }
         }
